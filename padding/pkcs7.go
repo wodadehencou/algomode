@@ -6,13 +6,13 @@ import (
 	"errors"
 )
 
-func pkcs7Padding(block cipher.Block, src []byte) []byte {
+func PKCS7Padding(block cipher.Block, src []byte) []byte {
 	padding := block.BlockSize() - len(src)%block.BlockSize()
 	padtext := bytes.Repeat([]byte{byte(padding)}, padding)
 	return append(src, padtext...)
 }
 
-func pkcs7UnPadding(block cipher.Block, src []byte) ([]byte, error) {
+func PKCS7UnPadding(block cipher.Block, src []byte) ([]byte, error) {
 	length := len(src)
 	unpadding := int(src[length-1])
 
